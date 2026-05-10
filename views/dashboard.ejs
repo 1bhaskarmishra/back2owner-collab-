@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Back2Owner</title>
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+    <style>
+        /* --- Dashboard Base & Layout --- */
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav id="navbar">
+    <!-- LEFT: Hamburger + Logo -->
+    <div id="nav-left">
+        <button id="hamburger-btn">&#9776;</button>
+        <img src="/images/logo_only.svg" alt="Logo" id="navbar-img">
+        <a href="/" id="brand-name">Back2Owner</a>
+    </div>
+
+    <!-- MIDDLE: Dashboard quick links -->
+    <div id="nav-middle">
+        <a href="#reports-list" class="dash-nav-link">My Items</a>
+        <a href="#" class="dash-nav-link">My Chats</a>
+        <button class="dash-nav-link" id="matches-btn">
+            AI Matches <span id="match-badge">1</span></button>
+    </div>
+
+    <!-- RIGHT: Bell + Profile dropdown + Logout -->
+    <div id="nav-right">
+        <button id="bell-btn">
+            <i class="fa-solid fa-bell"></i>
+            <span id="bell-badge">2</span>
+        </button>
+
+        <div id="profile-dropdown-wrapper">
+            <button id="profile-trigger">
+                <div id="user-avatar"><%= user.name[0].toUpperCase() %></div>
+                <div id="user-name-nav"><%= user.name[0].toUpperCase() + user.name.substring(1).toLowerCase() %></div>
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <div id="profile-dropdown" style="display:none;">
+                <a href="#">Edit Profile</a>
+                <a href="#" id="help-link">Help</a>
+                <a href="#" id="contact-trigger">Contact Us</a>
+                <hr>
+                <a href="/logout" id="logout-btn">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hamburger Dropdown Menu -->
+<div id="hamburger-menu" style="display:none;">
+    <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="/browseitem"><i class="fa-solid fa-magnifying-glass"></i> Browse Items</a>
+    <a href="/report-lost"><i class="fa-solid fa-triangle-exclamation"></i> Report Lost</a>
+    <a href="/report-found"><i class="fa-solid fa-box-open"></i> Report Found</a>
+    <hr>
+    <a href="#" id="contact-trigger-ham"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+</div>
+
+<!-- Main Dashboard -->
+<div id="dashboard-wrapper">
+
+    <!-- Welcome Banner -->
+    <div id="welcome-banner">
+        <div id="welcome-text">
+            <h1>Welcome back, <%= name %> 👋</h1>
+            <p>Here's what's happening with your lost & found reports.</p>
+        </div>
+        <div id="welcome-actions">
+            <button class="action-btn lost-action" onclick="window.location.href='/report-lost'">
+                <i class="fa-solid fa-magnifying-glass"></i> Report Lost Item
+            </button>
+            <button class="action-btn found-action" onclick="window.location.href='/report-found'">
+                <i class="fa-solid fa-box-open"></i> Report Found Item
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div id="stats-row">
+        <div class="stat-card">
+            <div class="stat-icon" style="background-color: #eef2ff;">
+                <i class="fa-solid fa-file-lines" style="color: #062460;"></i>
+            </div>
+            <div class="stat-text">
+                <h2 id="stat-total"><%= items.length %></h2>
+                <p>Total Reports</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="background-color: #fef9c3;">
+                <i class="fa-solid fa-bolt" style="color: #ca8a04;"></i>
+            </div>
+            <div class="stat-text">
+                <% let active = 0%>
+                <% for (let i=0; i<items.length; i++){%>
+                    <% if (items[i].status === "lost" || items[i].status === "found") { active ++ }%>
+                <%}%>
+                <h2 id="stat-active"><%= active %></h2>
+                <p>Active Reports</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="background-color: #dcfce7;">
+                <i class="fa-solid fa-circle-check" style="color: #16a34a;"></i>
+            </div>
+            <div class="stat-text">
+                <h2 id="stat-resolved"><%= items.length - active %></h2>
+                <p>Resolved</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="background-color: #fce7f3;">
+                <i class="fa-solid fa-wand-magic-sparkles" style="color: #db2777;"></i>
+            </div>
+            <div class="stat-text">
+                <h2 id="stat-matches">0</h2>
+                <p>AI Matches</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Two Column Layout -->
+    <div id="main-columns">
+
+        <!-- Left Column: My Reports -->
+        <div id="left-column">
+
+            <!-- Filter Bar -->
+            <div id="reports-header">
+                <h2>My Reports</h2>
+                <div id="filter-tabs">
+                    <button class="filter-tab active-tab" id="tab-all">All</button>
+                    <button class="filter-tab" id="tab-lost">Lost</button>
+                    <button class="filter-tab" id="tab-found">Found</button>
+                    <button class="filter-tab" id="tab-resolved">Resolved</button>
+                </div>
+            </div>
+            <% if (messages.success) { %>
+                <div class="alert success"><%= messages.success %></div>
+            <% } %>
+            <% if (messages.error) { %>
+                <div class="alert error"><%= messages.error %></div>
+            <% } %>
+
+            <!-- Reports List -->
+            <div id="reports-list">
+                <% if (items && items.length > 0) { %>
+                    <% items.forEach(item => { %>
+                <div class="report-card" data-type=<%= item.status %>>
+                    <img src="data:<%= item.mimetype %>;base64,<%= item.img.toString('base64') %>" alt="<%= item.item_name %>" class="report-img" >
+                    <div class="report-details">
+                        <div class="report-top">
+                            <h3><%= item.item_name %>></h3>
+                            <% if (item.status == "lost"){ %>
+                                <span class="status-badge lost-status"><%= item.status.toUpperCase() %></span>
+                            <%}%>
+                            <%if (item.status == "found" || item.status == "RESOLVED"){ %>
+                                <span class="status-badge found-status"><%= item.status.toUpperCase() %></span>
+                            <%}%>
+
+                        </div>
+                        <p class="report-loc"><i class="fa-solid fa-location-dot"></i> <%= item.location %> </p>
+                        <p class="report-date"><i class="fa-solid fa-calendar"></i> <%= item.incident_date.toLocaleString('en-GB', {day: '2-digit', month: 'long', year: 'numeric'}) %> </p>
+                    </div>
+                    <div class="report-actions">
+                        <button class="mini-btn view-mini-btn" onclick="window.location.href='/item-detail/<%= item.id %>'">View</button>
+                        <% if (item.status !== 'RESOLVED') { %>
+                        <button class="resolve-btn mini-btn resolve-mini-btn" onclick="handleResolve('<%= item.id %>', event)">
+                             Resolve
+                        </button>
+                        <% } %>
+                    </div>
+
+                </div>
+                        <% }); %>
+                <% } else { %>
+                    <p>No items reported yet.</p>
+                <% } %>
+
+            </div>
+            <!-- end reports list -->
+
+        </div>
+        <!-- end left column -->
+
+        <!-- Right Column -->
+        <div id="right-column">
+
+            <!-- AI Match Alert -->
+            <div id="match-alert">
+                <div id="match-alert-top">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <h3>AI Match Found!</h3>
+                </div>
+                <p>We are working toward AI implementation...</p>
+                <button id="view-match-btn" onclick="window.location.href='#'">
+                    View Match <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Notifications -->
+
+            <div class="notifications-container" id="notifications-box">
+                <h2><i class="fa-solid fa-bell"></i> Notifications</h2>
+                <% if (notifications.length > 0) { %>
+                    <% notifications.forEach(notif => { %>
+                        <div class="notif-card <%= notif.is_read ? '' : 'unread' %>">
+                            <p><%- notif.message %></p>
+                            <small><%= notif.created_at.toDateString() %></small>
+                            <a href="/item-detail/<%= notif.item_id %>">View Item</a>
+                        </div>
+                        <br>
+                    <% }) %>
+                <% } else { %>
+                    <p>No new notifications.</p>
+                <% } %>
+            </div>
+
+            <!-- Profile Card -->
+            <div id="profile-card">
+                <div id="profile-card-avatar"><%= user.name[0].toUpperCase() %></div>
+                <div id="profile-info">
+                    <h3 id="profile-card-name"><%= user.name[0].toUpperCase() + user.name.substring(1).toLowerCase() %></h3>
+                    <p><%=email%>></p>
+                    <!--                        <p>IIT Patna — CS & Data Analytics</p>-->
+                </div>
+                <button id="edit-profile-btn"><i class="fa-solid fa-pen"></i> Edit Profile</button>
+            </div>
+
+        </div>
+
+
+    </div>
+    <p id="get-name" style="display: none"><%=name%></p>
+
+</div>
+<!-- footer -->
+<footer id="footer">
+    <div class="footer-top">
+        <div class="footer-brand">
+            <span class="footer-logo">Back2Owner</span>
+            <p>IIT Patna's official campus lost & found platform. Helping students reconnect with their belongings since 2026.</p>
+        </div>
+        <div class="footer-links">
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <a href="/browseitem">Browse Items</a>
+                <a href="/report-lost">Report Lost</a>
+                <a href="/report-found">Report Found</a>
+            </div>
+            <div class="footer-col">
+                <h4>Account</h4>
+                <a href="#">Login</a>
+                <a href="#">Sign Up</a>
+            </div>
+            <div class="footer-col">
+                <h4>Info</h4>
+                <a href="#">About Us</a>
+                <a href="#" id="footer-contact-link">Contact</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Back2Owner · IIT Patna </p>
+    </div>
+</footer>
+
+<!-- Logout Confirm Modal -->
+<div id="logout-modal" style="display:none;">
+    <div id="logout-box">
+        <h2><i class="fa-solid fa-right-from-bracket"></i> Logout</h2>
+        <p>Are you sure you want to logout?</p>
+        <div id="logout-btns">
+            <button id="confirm-logout-btn">Yes, Logout</button>
+            <button id="cancel-logout-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="contact-modal" style="display:none;">
+    <div id="contact-box">
+        <h2><i class="fa-solid fa-envelope"></i> Contact Admin</h2>
+        <p>Having an issue? We'll get back to you shortly.</p>
+        <select id="contact-subject">
+            <option value="">Select a subject</option>
+            <option value="not-resolved">My item is not resolved</option>
+            <option value="report-user">Report a user</option>
+            <option value="technical">Technical issue</option>
+            <option value="suggestion">Suggestion</option>
+            <option value="other">Other</option>
+        </select>
+        <input type="text" id="contact-name" placeholder="Your Name">
+        <input type="text" id="contact-email" placeholder="Your Email">
+        <textarea id="contact-message" placeholder="Describe your issue..."></textarea>
+        <div id="contact-btns">
+            <button id="contact-submit-btn">Send Message</button>
+            <button id="contact-cancel-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script src="/javascripts/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,661 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f7fb;
+    padding-top: 64px;
+    font-family: "Manrope", sans-serif;
+}
+
+#navbar {
+    width: 100%;
+    height: 64px;
+    background-color: #0f1f4b;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+}
+
+#nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#logo {
+    height: 36px;
+}
+
+#brand-name {
+    color: white;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 22px;
+}
+
+#nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 6px;
+}
+
+.nav-link:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+#dashboard-btn {
+    background-color: #facc15;
+    color: #0f1f4b;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 800;
+    font-family: 'Manrope', sans-serif;
+    cursor: pointer;
+}
+
+#dashboard-btn:hover {
+    background-color: #eab308;
+}
+
+#logout-btn {
+    background: transparent;
+    color: white;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+    cursor: pointer;
+}
+
+#logout-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* logout popup */
+#logout-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#logout-box {
+    background: white;
+    border-radius: 14px;
+    padding: 35px 30px;
+    width: 360px;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+#logout-box h2 {
+    font-size: 22px;
+    color: #0f1f4b;
+    margin-bottom: 10px;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+#logout-box p {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 22px;
+}
+
+#logout-btns {
+    display: flex;
+    gap: 12px;
+}
+
+#confirm-logout-btn {
+    flex: 1;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 11px 0;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Manrope', sans-serif;
+    cursor: pointer;
+}
+
+#confirm-logout-btn:hover {
+    background-color: #dc2626;
+}
+
+#cancel-logout-btn {
+    flex: 1;
+    background: transparent;
+    color: #0f1f4b;
+    border: 2px solid #0f1f4b;
+    border-radius: 7px;
+    padding: 11px 0;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+    cursor: pointer;
+}
+
+#cancel-logout-btn:hover {
+    background-color: #0f1f4b;
+    color: white;
+}
+
+#nav-right-login {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#nav-username {
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Manrope', sans-serif;
+    margin-right: 4px;
+}
+#login-btn {
+    background: transparent;
+    color: white;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Manrope', sans-serif;
+    cursor: pointer;
+}
+
+#login-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#signup-btn {
+    background-color: #facc15;
+    color: #0f1f4b;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 800;
+    font-family: 'Manrope', sans-serif;
+    cursor: pointer;
+}
+
+#signup-btn:hover {
+    background-color: #eab308;
+}
+
+
+/* ── MAIN DETAIL WRAPPER ── */
+#detail-wrapper {
+    display: flex;
+    gap: 40px;
+    padding: 30px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+/* ── LEFT: IMAGE BOX ── */
+#detail-image-box {
+    position: relative;
+    flex: 1;
+    min-width: 280px;
+    max-width: 450px;
+}
+
+#detail-img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.15);
+    background-color: #dde3f0;
+    display: block;
+}
+
+/* Badge on image */
+.badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+.lost-badge {
+    background-color: #ef4444;
+    color: white;
+}
+
+.found-badge {
+    background-color: #16a34a;
+    color: white;
+}
+
+/* ── RIGHT: INFO BOX ── */
+#detail-info-box {
+    flex: 1;
+    min-width: 280px;
+}
+
+#detail-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #062460;
+    margin-bottom: 20px;
+}
+
+/* Meta rows */
+#detail-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.meta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    color: #333;
+}
+
+.meta-row i {
+    color: #062460;
+    font-size: 17px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Description */
+#detail-description-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.08);
+    margin-bottom: 24px;
+}
+
+#detail-description-box h3 {
+    font-size: 17px;
+    color: #062460;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+#detail-description {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.7;
+}
+
+/* Action Buttons */
+#action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+#main-action-btn {
+    flex: 1;
+    background-color: #062460;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    min-width: 180px;
+}
+
+#main-action-btn:hover {
+    background-color: #0a3580;
+}
+
+
+#chat-btn {
+    flex: 1;
+    background-color: #16a34a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    min-width: 180px;
+}
+#chat-btn:hover { background-color: #15803d; }
+
+#share-btn {
+    background: transparent;
+    color: #062460;
+    border: 2px solid #062460;
+    border-radius: 8px;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#share-btn:hover {
+    background-color: #062460;
+    color: white;
+}
+
+/* Contact Note */
+#contact-note {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.5;
+}
+
+#contact-note i {
+    color: #062460;
+    margin-right: 6px;
+}
+
+/* ── SIMILAR ITEMS SECTION ── */
+#similar-section {
+    padding: 40px 40px 60px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+#similar-section h2 {
+    font-size: 26px;
+    color: #062460;
+    margin-bottom: 6px;
+}
+
+.similar-subtitle {
+    font-size: 15px;
+    color: #777;
+    margin-bottom: 24px;
+}
+
+#similar-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Similar Card */
+.similar-card {
+    width: 240px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.similar-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 8px 18px rgba(0,0,0,0.14);
+}
+
+.similar-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    background-color: #dde3f0;
+    display: block;
+}
+
+.similar-body {
+    padding: 12px;
+}
+
+.similar-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #062460;
+    margin-bottom: 8px;
+}
+
+.similar-detail {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.similar-detail i {
+    color: #062460;
+    width: 15px;
+    margin-right: 6px;
+}
+
+.view-btn {
+    width: 100%;
+    margin-top: 10px;
+    background-color: #062460;
+    color: white;
+    border: 2px solid #062460;
+    border-radius: 6px;
+    padding: 8px 0;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.view-btn:hover {
+    background-color: #0a3580;
+}
+
+
+
+/* ── CONTACT MODAL ── */
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-box {
+    background: white;
+    border-radius: 14px;
+    padding: 35px 30px;
+    width: 420px;
+    max-width: 90%;
+    box-shadow: 0px 8px 30px rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+#modal-title {
+    font-size: 22px;
+    color: #062460;
+    margin-bottom: 10px;
+}
+
+#modal-desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+#modal-box input,
+#modal-box textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 15px;
+    border: 2px solid #062460;
+    border-radius: 7px;
+    margin-bottom: 14px;
+    outline: none;
+}
+
+#modal-box textarea {
+    height: 90px;
+    resize: vertical;
+}
+
+#modal-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+#modal-submit-btn {
+    flex: 1;
+    background-color: #062460;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 12px 0;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#modal-submit-btn:hover {
+    background-color: #0a3580;
+}
+
+#modal-cancel-btn {
+    flex: 1;
+    background: transparent;
+    color: #ef4444;
+    border: 2px solid #ef4444;
+    border-radius: 7px;
+    padding: 12px 0;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#modal-cancel-btn:hover {
+    background-color: #ef4444;
+    color: white;
+}
+
+/* ---- footer ---- */
+
+#footer {
+    background-color: #0f1f4b;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 60px 60px 24px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 24px;
+}
+
+.footer-brand {
+    max-width: 280px;
+}
+
+.footer-logo {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 22px;
+    color: white;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.footer-brand p {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.footer-links {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-col h4 {
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-col a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-col a:hover {
+    color: #facc15;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+}
+#resolved-banner {
+    background-color: #dcfce7;
+    color: #15803d;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}

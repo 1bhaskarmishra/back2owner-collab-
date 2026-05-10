@@ -1,0 +1,146 @@
+/* responsive.css */
+
+/* --- Tablet & Small Desktop (Below 1024px) --- */
+@media (max-width: 1024px) {
+    #dashboard-wrapper {
+        padding: 20px;
+    }
+
+    #main-columns {
+        flex-direction: column; /* Stack columns vertically */
+        gap: 30px;
+    }
+
+    #left-column, #right-column {
+        width: 100%; /* Take full width */
+    }
+
+    #stats-row {
+        grid-template-columns: repeat(2, 1fr); /* 2x2 grid for stats */
+        gap: 15px;
+    }
+}
+
+/* --- Mobile Devices (Below 768px) --- */
+@media (max-width: 768px) {
+    /* Navigation Adjustments */
+    #nav-middle {
+        display: none; /* Hide middle links, they move to hamburger */
+    }
+
+    #user-name-nav {
+        display: none; /* Hide name to save space, keep avatar */
+    }
+
+    #welcome-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+    }
+
+    #welcome-actions {
+        width: 100%;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .action-btn {
+        width: 100%; /* Full width buttons on mobile */
+        justify-content: center;
+    }
+
+    /* Stats Grid */
+    #stats-row {
+        grid-template-columns: 1fr; /* Stack stats 1 per row */
+    }
+
+    /* Report Cards */
+    .report-card {
+        flex-direction: column; /* Stack image and details */
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .report-img {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 15px;
+    }
+
+    .report-actions {
+        width: 100%;
+        flex-direction: row;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .mini-btn {
+        flex: 1; /* Make buttons equal width */
+        text-align: center;
+    }
+
+    /* Filter Tabs */
+    #reports-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    #filter-tabs {
+        width: 100%;
+        overflow-x: auto; /* Allow horizontal scroll for tabs */
+        padding-bottom: 5px;
+        white-space: nowrap;
+    }
+}
+
+/* --- Small Mobile (Below 480px) --- */
+@media (max-width: 480px) {
+    #brand-name {
+        font-size: 1.1rem; /* Shrink logo text */
+    }
+
+    #navbar-img {
+        height: 30px;
+    }
+
+    .footer-top {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    #contact-box, #logout-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* --- Utilities for the Hamburger Menu (Ensure it works) --- */
+#hamburger-menu {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+    padding: 20px;
+    flex-direction: column;
+    display: none; /* Controlled by JS */
+}
+
+#hamburger-menu.active {
+    display: flex !important;
+}
+
+#hamburger-menu a {
+    padding: 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+}

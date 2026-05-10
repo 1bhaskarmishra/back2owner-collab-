@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back2owner</title>
+    <link rel="stylesheet" href="/stylesheets/login-signup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div id="navbar">
+    <div id="nav-left">
+        <img src="/images/logo_only.svg" alt="Logo" id="navbar-img">
+        <a href="/" id="brand-name">Back2Owner</a>
+    </div>
+    <div id="nav-right">
+        <!-- shown when login section is visible -->
+        <button id="nav-signup-btn"><a href="/signup" style="text-decoration: none">Sign Up</a></button>
+        <!-- shown when signup section is visible -->
+        <button id="nav-login-btn" style="display:none;"><i class="fa-regular fa-user"></i>  Login</button>
+    </div>
+</div>
+
+<!--User login section -->
+
+<div id="login-section">
+    <form method="POST" action="/login" id="login-form" >
+<!--        wrong password flash-->
+        <% if (messages.error) { %>
+            <div class="alert-box error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <%= messages.error %>
+            </div>
+        <% } %>
+
+        <input type="hidden" name="returnTo" value="<%= returnUrl %>">
+        <% if (messages.success && messages.success.length > 0) { %>
+            <div class="alert-box success">
+                <%= messages.success %>
+            </div>
+        <% } %>
+
+        <h2>Login</h2>
+        <br>
+        <input type="email" id="login-email" placeholder="Enter your email" name="username" required>
+        <br>
+        <input type="password" id="login-password" placeholder="Enter your password" name="password" required>
+
+        <p>
+            <a href="#" id="forgot-password" style="font-size: 13px; color: #062460;">Forgot Password?</a>
+        </p>
+        <br>
+        <button id="login-button" type="submit">Login</button>
+        <br>
+
+        <p>Don't have an account? <a href="/signup" id="open-signup">Sign up</a></p>
+    </form>
+</div>
+
+<footer id="footer">
+    <p>© 2026 Back2owner. All rights reserved.</p>
+</footer>
+
+<script src="/javascripts/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back2owner</title>
+    <link rel="stylesheet" href="/stylesheets/login-signup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div id="navbar">
+    <div id="nav-left">
+        <img src="/images/logo_only.svg" alt="Logo" id="navbar-img">
+        <a href="/" id="brand-name">Back2Owner</a>
+    </div>
+    <div id="nav-right">
+        <!-- shown when signup section is visible -->
+        <button id="nav-login-btn"><i class="fa-regular fa-user"></i> <a href="/login" style="text-decoration: none">Login</a> </button>
+    </div>
+</div>
+<!-- signup section -->
+<div id="signup-section">
+    <form class="login-form" id="register-form" action="/register" method="POST">
+        <h2>Sign Up</h2>
+        <br>
+        <input type="text" placeholder="Enter your name" id="signup-name" name="name" required>
+        <br>
+        <input type="email"  placeholder="Enter your email" id="signup-email" name="login_id" required>
+        <br>
+        <input type="password"  placeholder="Create a password" id="signup-password" name="login_pass" required>
+        <br>
+
+        <input type="password" placeholder="Confirm your password" id="signup-confirm" name="confirm_login_pass" required>
+
+        <!--        MESSAGE-->
+
+        <% if (message && message.length > 0) { %>
+            <div class="alert-box <%= message.includes('successfully') ? 'success' : 'error' %>">
+                <%= message %>
+            </div>
+        <% } %>
+
+        <button id="signup-button" type="submit">Sign Up</button>
+        <br>
+        <p>Already have an account? <a href="/login" id="open-login">Login</a></p>
+    </form>
+</div>
+
+<footer id="footer">
+    <p>© 2026 Back2owner. All rights reserved.</p>
+</footer>
+<script src="/javascripts/signup.js"></script>
+</body>
+</html>

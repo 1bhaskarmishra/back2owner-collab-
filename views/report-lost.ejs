@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Lost Item - Back2Owner</title>
+    <link rel="stylesheet" href="/stylesheets/report-lost-found.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- navbar - same as homepage -->
+
+    <nav id="navbar">
+        <div id="nav-left">
+            <img src="images/logo_only.svg" id="logo">
+            <span id="brand-name">Back2Owner</span>
+        </div>
+        
+        <div id="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="browseitem" class="nav-link">Browse</a>
+            <a href="report-lost" class="nav-link">Report Lost</a>
+            <a href="report-found" class="nav-link">Report Found</a>
+            
+        </div>
+    </div>
+
+    <!-- only logged-in state, no login/signup at all -->
+    <div id="nav-right-login">
+        <span id="nav-username"> Hi! <%= user.name[0].toUpperCase() + user.name.substring(1).toLowerCase() %></span>
+        <button id="dashboard-btn">My Dashboard</button>
+        <button id="logout-btn">Logout</button>
+    </div>
+</nav>
+
+    <!-- page top banner -->
+    <div id="page-banner" class="lost-banner">
+        <div class="banner-inner">
+            <div class="banner-icon-wrap lost-icon-bg">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="banner-text">
+                
+                <h1>Report a Lost Item</h1>
+                <p>Fill in the details below. The more info you give, the better the AI can match your item.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- main content -->
+    <div id="form-page-wrap">
+
+        <div id="form-left">
+
+            <!-- the actual form -->
+            <div class="form-card">
+                <div class="form-card-header lost-header">
+                    <i class="fa-solid fa-file-pen"></i>
+                    Lost Item Details
+                </div>
+
+                <div class="form-card-body">
+
+                    <!-- item name -->
+                    <div class="field-group">
+                        <label for="item-name">Item Name <span class="required-star">*</span></label>
+                        <input type="text" id="item-name" class="text-input" placeholder="e.g.Blue Water Bottle" name="item_name">
+                        <!-- <span class="field-hint">Be specific — brand, color, model if you know it</span> -->
+                    </div>
+
+                    <!-- category -->
+                    <div class="field-group">
+                        <label for="item-category">Category <span class="required-star">*</span></label>
+                        <div class="select-wrap">
+                            <select id="item-category" class="select-input" name="item_category">
+                                <option value="">-- Select a category --</option>
+                                <option value="electronics">Electronics (phone, laptop, charger, etc.)</option>
+                                <option value="documents">Documents (ID card, admit card, etc.)</option>
+                                <option value="accessories">Accessories (watch, glasses, keys, etc.)</option>
+                                <option value="bags">Bags & Clothing</option>
+                                <option value="stationery">Books & Stationery</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+
+                    <!-- description -->
+                    <div class="field-group">
+                        <label for="item-desc">Description <span class="required-star">*</span></label>
+                        <textarea id="item-desc" class="textarea-input" rows="4"  placeholder="Describe the item in detail — color, brand, any marks, stickers, scratches, etc." name="item_desc"></textarea>
+                        <!-- <span class="char-counter"><span id="desc-count">0</span>/350</span> -->
+                    </div>
+
+                    
+                        <!-- last seen location -->
+                        <div class="field-group">
+                            <label for="last-location">Last Seen Location <span class="required-star">*</span></label>
+                             <input type="text" id="last-location" class="text-input" placeholder="e.g.  near Central Library" name="lost_location">
+                            
+                        </div>
+
+                        <!-- date lost -->
+                        <div class="field-group">
+                            <label for="date-lost">Date Lost <span class="required-star">*</span></label>
+                            <input type="date" id="date-lost" class="text-input" name="lost_date">
+                        </div>
+
+                    
+                    <!-- image upload -->
+                    <div class="field-group">
+                        <label>Upload Photo <span class="optional-tag">(helps a lot with AI matching)</span></label>
+                        <div class="upload-area" id="upload-area-lost">
+                            <input type="file" id="photo-upload-lost" accept="image/*" style="display:none;" name="img">
+                            <div id="upload-placeholder-lost" class="upload-placeholder">
+                                <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                                <p class="upload-main-text">Drag & drop a photo here</p>
+                                <p class="upload-sub-text">or <span class="upload-link" id="upload-trigger-lost">click to browse</span></p>
+                                <p class="upload-formats">JPG, PNG, WEBP — max 5MB</p>
+                            </div>
+                            <div id="image-preview-lost" class="image-preview-wrap" style="display:none;">
+                                <img id="preview-img-lost" class="preview-img" src="" alt="Preview">
+                                <button type="button" class="remove-img-btn" id="remove-img-lost">
+                                    <i class="fa-solid fa-xmark"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- submit -->
+                    <button type="button" id="submit-lost-btn" class="submit-btn lost-submit-btn">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        Submit Lost Report
+                    </button>
+
+                    <p class="form-note">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Your report will go live instantly. Our AI will scan for matches among all found items.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- right side info panel -->
+        <div id="form-right">
+
+            <!-- tips card -->
+            <div class="info-card">
+                <div class="info-card-title">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    Tips for a Better Report
+                </div>
+                <ul class="tips-list">
+                    <li>
+                        <i class="fa-solid fa-check tip-check"></i>
+                        Mention any unique marks — scratches, stickers, broken parts
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-check tip-check"></i>
+                        Upload a photo if you have one — AI matching works much better with images
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-check tip-check"></i>
+                        Choose the most accurate location — don't just put "campus"
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-check tip-check"></i>
+                        Check the Browse page first — it might already be reported as found
+                    </li>
+                </ul>
+            </div>
+
+            <!-- what happens next card -->
+            <div class="info-card">
+                <div class="info-card-title">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    What Happens Next?
+                </div>
+                <div class="steps-mini">
+                    <div class="mini-step">
+                        <div class="mini-step-num">1</div>
+                        <div class="mini-step-text">Your report goes live on the platform immediately</div>
+                    </div>
+                    <div class="mini-step">
+                        <div class="mini-step-num">2</div>
+                        <div class="mini-step-text">AI scans existing found reports for a match</div>
+                    </div>
+                    <div class="mini-step">
+                        <div class="mini-step-num">3</div>
+                        <div class="mini-step-text">If a match is found, you get notified in your dashboard</div>
+                    </div>
+                    <div class="mini-step">
+                        <div class="mini-step-num">4</div>
+                        <div class="mini-step-text">You contact the finder and arrange a handover on campus</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- browse first nudge -->
+            <div class="info-card browse-nudge">
+                <i class="fa-solid fa-magnifying-glass nudge-icon"></i>
+                <div>
+                    <p class="nudge-title">Already reported as found?</p>
+                    <p class="nudge-sub">Someone might have already submitted a found report for your item.</p>
+                    <a href="browseitem" class="nudge-link">Browse Found Items <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- success popup -->
+    <div id="success-modal" style="display:none;">
+        <div id="success-box">
+            <div class="success-icon-wrap">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h2>Report Submitted!</h2>
+            <p>Your lost item report is now live. We'll notify you as soon as a match is found.</p>
+            <div class="success-btns">
+                <button id="go-dashboard-btn" class="success-primary-btn">Go to Dashboard</button>
+                <button id="go-browse-btn" class="success-secondary-btn">Browse Found Items</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- logout popup - same as homepage -->
+    <div id="logout-modal" style="display:none;">
+        <div id="logout-box">
+            <h2><i class="fa-solid fa-right-from-bracket"></i> Logout</h2>
+            <p>Are you sure you want to logout?</p>
+            <div id="logout-btns">
+                <button id="confirm-logout-btn">Yes, Logout</button>
+                <button id="cancel-logout-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="footer-logo">Back2Owner</span>
+                <p>IIT Patna's official campus lost & found platform. Helping students reconnect with their belongings since 2024.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="browseitem">Browse Items</a>
+                    <a href="/report-lost">Report Lost</a>
+                    <a href="/report-found">Report Found</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Sign Up</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <a href="index#about-us">About Us</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Back2Owner · IIT Patna </p>
+        </div>
+    </footer>
+
+<script src="/javascripts/report-lost.js"></script>
+</body>
+</html>
