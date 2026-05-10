@@ -1100,3 +1100,20 @@ html {
         display: none;
     }
 }
+
+/*some visual change if recent post not loded from database*/
+.db-error-message {
+    grid-column: 1 / -1; /* spans across the whole grid */
+    text-align: center;
+    padding: 40px;
+    background: #fff1f2;
+    border: 1px solid #fda4af;
+    border-radius: 12px;
+    color: #be123c;
+}
+
+.db-error-message i {
+    font-size: 40px;
+    margin-bottom: 15px;
+    display: block;
+}

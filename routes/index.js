@@ -15,7 +15,12 @@ router.get('/', async function (req, res, next) {
     res.render('index.ejs', { items:result.rows, isLoggedIn: req.isAuthenticated(), user: req.user || null})
   } catch (err) {
     console.error("Database query failed:", err);
-    res.status(500).send("Error loading recent items");
+    res.render("index.ejs", {
+      items: [],
+      isLoggedIn: req.isAuthenticated(),
+      user: req.user || null,
+      dbError: true
+    });
   }
 });
 

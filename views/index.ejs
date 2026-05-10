@@ -199,7 +199,11 @@
                             <a href="/item-detail/<%= item.id %>" class="view-btn" style="text-decoration: none">View Details <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
-                <% }); %>
+                <% }); } else if (typeof dbError !== 'undefined' && dbError) { %>
+                    <div class="db-error-message">
+                        <i class="fa-solid fa-database"></i>
+                        <p>We're having trouble connecting to our database. Please refresh the page or try again later.</p>
+                    </div>
             <% } else { %>
                 <p>No items reported yet. Be the first to report!</p>
             <% } %>
