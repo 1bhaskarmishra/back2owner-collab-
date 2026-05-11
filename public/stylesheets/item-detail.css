@@ -6,45 +6,56 @@
 
 body {
     background-color: #f5f7fb;
-    padding-top: 64px;
     font-family: "Manrope", sans-serif;
 }
 
 #navbar {
+    display: flex;
     width: 100%;
-    height: 64px;
-    background-color: #0f1f4b;
-    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    height: 72px;
+    background: #0f1f4b;
+    position: sticky;
     top: 0;
     z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 32px;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+    gap: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 #nav-left {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-shrink: 0;
+    min-width: 0;
 }
 
 #logo {
-    height: 36px;
+    height: 34px;
+    width: auto;
 }
 
 #brand-name {
-    color: white;
     font-family: 'Archivo Black', sans-serif;
-    font-size: 22px;
+    color: #ffffff;
+    font-size: 1.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #nav-links {
     display: flex;
-    align-items: center;
-    gap: 4px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+    gap: 25px;
+    flex-grow: 1;
+    justify-content: center;
 }
+
 
 .nav-link {
     color: rgba(255, 255, 255, 0.75);
@@ -55,10 +66,12 @@ body {
     border-radius: 6px;
 }
 
+
 .nav-link:hover {
-    color: white;
+    color: #facc15;
     background-color: rgba(255, 255, 255, 0.12);
 }
+
 #dashboard-btn {
     background-color: #facc15;
     color: #0f1f4b;
@@ -658,4 +671,96 @@ body {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 16px;
+}
+
+#nav-right-logout,
+#nav-right-login {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+#nav-username {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 5px;
+}
+
+
+#login-btn, #logout-btn, #dashboard-btn, #signup-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: none;
+    font-family: 'Manrope', sans-serif;
+    white-space: nowrap;
+}
+
+#login-btn {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#signup-btn, #dashboard-btn {
+    background: #facc15;
+    color: #0f1f4b;
+}
+
+#logout-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+
+@media (max-width: 1024px) {
+    #nav-links {
+        gap: 15px;
+    }
+
+    #brand-name {
+        font-size: 1.15rem;
+    }
+
+    #nav-username {
+        max-width: 90px;
+    }
+}
+
+@media (max-width: 768px) {
+    #nav-links {
+        display: none;
+    }
+
+    #navbar {
+        padding: 0 15px;
+        height: 64px;
+    }
+
+    #nav-username {
+        display: none;
+    }
+
+    #brand-name {
+        font-size: 1.1rem;
+    }
+
+    #signup-btn, #dashboard-btn {
+        padding: 7px 12px;
+    }
+}
+
+@media (max-width: 450px) {
+    #brand-name {
+        display: none;
+    }
 }
