@@ -1,0 +1,121 @@
+/* ---- about section ---- */
+
+#about-section {
+    padding: 80px 60px;
+    background-color: white;
+    text-align: center;
+}
+
+#about-section h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 38px;
+    color: #0f1f4b;
+}
+
+#about-section h3 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 26px;
+    color: #0f1f4b;
+    margin-top: 10px;
+}
+
+/* mission box */
+.about-mission {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    background-color: #f0f4ff;
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 820px;
+    margin: 0 auto 60px auto;
+    text-align: left;
+}
+
+.about-mission-icon {
+    width: 56px;
+    height: 56px;
+    background-color: #0f1f4b;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.about-mission-icon i {
+    color: #facc15;
+    font-size: 24px;
+}
+
+.about-mission h3 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 20px;
+    color: #0f1f4b;
+    margin-bottom: 10px;
+}
+
+.about-mission p {
+    font-size: 15px;
+    color: #374151;
+    line-height: 1.75;
+}
+
+/* about section */
+
+#about-us {
+    padding: 60px 40px;
+    background-color: #f0f4ff;
+    text-align: center;
+}
+
+#about-us h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 36px;
+    color: #0f1f4b;
+}
+
+/* small para at top */
+#about-top-para {
+    font-size: 16px;
+    color: #374151;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* box1 box2 box3 all look same mostly */
+#box1, #box2, #box3 {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px 36px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+}
+
+#box1 h3, #box2 h3, #box3 h3 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 22px;
+    color: #0f1f4b;
+}
+
+#box1 p, #box2 p, #box3 p {
+    font-size: 15px;
+    color: #374151;
+    line-height: 1.8;
+}
+
+/* different border color for each box */
+#box1 {
+    border-left: 5px solid #ef4444;
+}
+
+#box2 {
+    border-left: 5px solid #16a34a;
+}
+
+#box3 {
+    border-left: 5px solid #facc15;
+}

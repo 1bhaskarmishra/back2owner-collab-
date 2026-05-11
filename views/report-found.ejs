@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report Found Item - Back2Owner</title>
     <link rel="stylesheet" href="/stylesheets/report-lost-found.css">
+    <link rel="stylesheet" href="/stylesheets/contact-modal.css">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -285,7 +286,7 @@
         <div class="footer-top">
             <div class="footer-brand">
                 <span class="footer-logo">Back2Owner</span>
-                <p>IIT Patna's official campus lost & found platform. Helping students reconnect with their belongings since 2024.</p>
+                <p>IIT Patna's official campus lost & found platform. Helping students reconnect with their belongings since 2026.</p>
             </div>
             <div class="footer-links">
                 <div class="footer-col">
@@ -301,8 +302,9 @@
                 </div>
                 <div class="footer-col">
                     <h4>Info</h4>
-                    <a href="index#about-us">About Us</a>
-                    <a href="#">Contact</a>
+                    <a href="/about">About Us</a>
+                    <a href="#" id="footer-contact-link">Contact</a>
+                    
                 </div>
             </div>
         </div>
@@ -311,6 +313,30 @@
         </div>
     </footer>
 
+    <!-- contact modal popup -->
+    <div id="contact-modal" style="display:none;">
+        <div id="contact-box">
+            <h2><i class="fa-solid fa-envelope"></i> Contact Admin</h2>
+            <p>Having an issue? We'll get back to you shortly.</p>
+            <select id="contact-subject">
+                <option value="">Select a subject</option>
+                <option value="not-resolved">My item is not resolved</option>
+                <option value="report-user">Report a user</option>
+                <option value="technical">Technical issue</option>
+                <option value="suggestion">Suggestion</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="text" id="contact-name" placeholder="Your Name">
+            <input type="text" id="contact-email" placeholder="Your Email">
+            <textarea id="contact-message" placeholder="Describe your issue..."></textarea>
+            <div id="contact-btns">
+                <button id="contact-submit-btn">Send Message</button>
+                <button id="contact-cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+<script src="/javascripts/contact-modal.js"></script>
 <script src="/javascripts/report-found.js"></script>
 
 </body>
