@@ -1,0 +1,615 @@
+/* ============================================
+   responsive.css — Back2Owner
+   Covers all pages for tablet and mobile screens
+   Breakpoints used:
+   900px → tablet
+   768px → tablet portrait
+   600px → large mobile
+   480px → small mobile
+   ============================================ */
+
+
+/* ── NAVBAR (common on all pages) ── */
+
+@media (max-width: 900px) {
+
+    /* shrink nav links font size on medium screens */
+    .nav-link {
+        font-size: 13px;
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* hide the middle nav links on mobile — too cramped */
+    #nav-links {
+        display: none;
+    }
+
+    /* shrink the brand name a little */
+    #brand-name {
+        font-size: 17px;
+    }
+
+    /* make navbar buttons smaller */
+    #nav-right-logout button,
+    #nav-right-login button {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* very small screens — hide signup button to save space */
+    #signup-btn {
+        display: none;
+    }
+
+    #brand-name {
+        font-size: 15px;
+    }
+}
+
+
+/* ── FOOTER (common on all pages) ── */
+
+@media (max-width: 768px) {
+
+    /* stack footer top section vertically */
+    .footer-top {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    /* footer brand takes full width */
+    .footer-brand {
+        max-width: 100%;
+    }
+
+    /* reduce footer padding */
+    #footer {
+        padding: 40px 24px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* stack footer link columns vertically */
+    .footer-links {
+        flex-direction: column;
+        gap: 24px;
+    }
+}
+
+
+/* ── LOGOUT MODAL (common on all pages) ── */
+
+@media (max-width: 480px) {
+
+    #logout-box {
+        width: 90%;
+        padding: 24px 18px;
+    }
+
+    #logout-btns {
+        flex-direction: column;
+    }
+}
+
+
+/* ── CONTACT MODAL (common on all pages) ── */
+
+@media (max-width: 480px) {
+
+    #contact-box {
+        width: 92%;
+        padding: 24px 16px;
+    }
+
+    #contact-btns {
+        flex-direction: column;
+    }
+}
+
+
+/* ================================================
+   HOMEPAGE (index.html)
+   ================================================ */
+
+/* hero section */
+@media (max-width: 768px) {
+
+    /* reduce hero padding */
+    #hero-section {
+        padding: 60px 24px 40px;
+    }
+
+    /* smaller heading */
+    #hero-section h1 {
+        font-size: 32px;
+    }
+
+    /* hero buttons stack vertically */
+    #buttons {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    #buttons button {
+        width: 100%;
+    }
+
+    /* stats row wraps */
+    .hero-stats {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .stat-divider {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+
+    #hero-section h1 {
+        font-size: 26px;
+    }
+
+    .hero-desc {
+        font-size: 14px;
+    }
+}
+
+/* search section */
+@media (max-width: 768px) {
+
+    #Search-bar {
+        padding: 16px;
+    }
+
+    /* stack search input and button */
+    .search-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .search-inner input {
+        width: 100%;
+    }
+
+    #searchBtn {
+        width: 100%;
+    }
+
+    /* search tags wrap */
+    .search-tags {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+/* how it works section */
+@media (max-width: 768px) {
+
+    /* steps go vertical */
+    #steps {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* hide horizontal arrows */
+    .step-arrow {
+        display: none;
+    }
+
+    .step {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+/* recently reported items section */
+@media (max-width: 900px) {
+
+    /* 2 columns on tablet */
+    #items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    /* 1 column on mobile */
+    #items {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* features section */
+@media (max-width: 900px) {
+
+    /* 2 columns on tablet */
+    #features-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    /* 1 column on mobile */
+    #features-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* about section */
+@media (max-width: 768px) {
+
+    #about-us {
+        padding: 40px 20px;
+    }
+
+    #box1, #box2, #box3 {
+        padding: 20px;
+    }
+}
+
+
+/* ================================================
+   BROWSE PAGE (browseitem.html)
+   ================================================ */
+
+@media (max-width: 768px) {
+
+    /* page header smaller */
+    #page-header {
+        padding: 24px 20px;
+    }
+
+    #page-header h1 {
+        font-size: 26px;
+    }
+
+    /* filter section stacks vertically */
+    #filter-section {
+        padding: 16px;
+    }
+
+    /* search row stacks */
+    #search-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #search-box {
+        width: 100%;
+    }
+
+    #search-btn {
+        width: 100%;
+    }
+
+    /* filters row wraps */
+    #filters-row {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .filter-select {
+        width: 100%;
+    }
+
+    #clear-filters-btn {
+        width: 100%;
+    }
+
+    /* type toggle buttons take full width */
+    #type-toggle {
+        display: flex;
+        width: 100%;
+    }
+
+    #type-toggle .toggle-btn {
+        flex: 1;
+    }
+}
+
+/* items grid on browse page */
+@media (max-width: 900px) {
+
+    /* 2 columns on tablet */
+    #items-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    /* 1 column on mobile */
+    #items-grid {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+    }
+}
+
+
+/* ================================================
+   DASHBOARD PAGE (dashboard.html)
+   ================================================ */
+
+@media (max-width: 900px) {
+
+    /* welcome banner stacks */
+    #welcome-banner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* main two columns become one */
+    #main-columns {
+        flex-direction: column;
+    }
+
+    /* both columns take full width */
+    #left-column,
+    #right-column {
+        width: 100%;
+        min-width: unset;
+    }
+
+    /* stats row wraps into 2x2 grid */
+    #stats-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* reduce dashboard wrapper padding */
+    #dashboard-wrapper {
+        padding: 20px 16px 40px;
+    }
+
+    /* welcome actions stack */
+    #welcome-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #welcome-actions .action-btn {
+        width: 100%;
+    }
+
+    /* filter tabs wrap */
+    #filter-tabs {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    /* report card adapts for small screen */
+    .report-card {
+        flex-wrap: wrap;
+    }
+
+    /* report actions go horizontal */
+    .report-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .mini-btn {
+        flex: 1;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* stats go single column */
+    #stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    /* reports header stacks */
+    #reports-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* hamburger menu full width on mobile */
+    #hamburger-menu {
+        width: 100%;
+    }
+
+    /* logout modal buttons stack */
+    #logout-btns {
+        flex-direction: column;
+    }
+}
+
+
+/* ================================================
+   REPORT LOST + REPORT FOUND (report-lost-found.css)
+   ================================================ */
+
+@media (max-width: 900px) {
+
+    /* page banner smaller */
+    #page-banner {
+        padding: 30px 24px;
+    }
+
+    /* form layout goes to single column */
+    #form-page-wrap {
+        flex-direction: column;
+        padding: 20px 16px;
+    }
+
+    /* left and right take full width */
+    #form-left,
+    #form-right {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* two-col fields stack vertically */
+    .two-col-fields {
+        flex-direction: column;
+    }
+
+    /* radio group stacks */
+    .radio-group {
+        flex-direction: column;
+    }
+
+    /* submit button full width */
+    .submit-btn {
+        width: 100%;
+    }
+
+    /* success modal buttons stack */
+    .success-btns {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .success-primary-btn,
+    .success-secondary-btn {
+        width: 100%;
+    }
+}
+
+
+/* ================================================
+   ITEM DETAIL PAGE (item-detail.html)
+   ================================================ */
+
+@media (max-width: 900px) {
+
+    /* detail section stacks vertically */
+    #detail-wrapper {
+        flex-direction: column;
+        padding: 24px 20px;
+        gap: 24px;
+    }
+
+    /* image takes full width */
+    #detail-image-box {
+        width: 100%;
+    }
+
+    #detail-img {
+        width: 100%;
+        height: 280px;
+    }
+
+    /* action buttons wrap */
+    #action-buttons {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    #action-buttons button {
+        flex: 1;
+        min-width: 140px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* similar items section */
+    #similar-section {
+        padding: 30px 16px;
+    }
+
+    /* similar grid 2 columns */
+    #similar-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* similar grid 1 column */
+    #similar-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* action buttons stack */
+    #action-buttons {
+        flex-direction: column;
+    }
+
+    #action-buttons button {
+        width: 100%;
+    }
+
+    /* item modal responsive */
+    #modal-box {
+        width: 92%;
+        padding: 24px 16px;
+    }
+
+    #modal-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #modal-submit-btn,
+    #modal-cancel-btn {
+        width: 100%;
+    }
+}
+
+
+/* ================================================
+   LOGIN / SIGNUP PAGE (login-signup.html)
+   ================================================ */
+
+@media (max-width: 600px) {
+
+    /* login and signup boxes take more width */
+    #login-section,
+    #signup-section {
+        width: 92%;
+        padding: 24px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* full width on small phones */
+    #login-section,
+    #signup-section {
+        width: 100%;
+        border-radius: 0;
+        padding: 30px 20px;
+    }
+
+    /* inputs full width */
+    #login-section input,
+    #signup-section input {
+        width: 100%;
+    }
+
+    /* buttons full width */
+    #login-button,
+    #signup-button {
+        width: 100%;
+    }
+}

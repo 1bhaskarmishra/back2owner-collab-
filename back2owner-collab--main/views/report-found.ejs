@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Found Item - Back2Owner</title>
+    <link rel="stylesheet" href="/stylesheets/report-lost-found.css">
+    <link rel="stylesheet" href="/stylesheets/contact-modal.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- navbar -->
+    <nav id="navbar">
+        <div id="nav-left">
+            <img src="/images/logo_only.svg" id="logo">
+            <span id="brand-name">Back2Owner</span>
+        </div>
+        
+        <div id="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="browseitem" class="nav-link">Browse</a>
+            <a href="report-lost" class="nav-link">Report Lost</a>
+            <a href="report-found" class="nav-link">Report Found</a>
+            
+        </div>
+    </div>
+
+    <!-- only logged-in state, no login/signup at all -->
+    <div id="nav-right-login">
+        <span id="nav-username"><%= user.name[0].toUpperCase() + user.name.substring(1).toLowerCase() %></span>
+        <button id="dashboard-btn">My Dashboard</button>
+        <button id="logout-btn">Logout</button>
+    </div>
+</nav>
+
+    <!-- page banner -->
+    <div id="page-banner" class="found-banner">
+        <div class="banner-inner">
+            <div class="banner-icon-wrap found-icon-bg">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+            <div class="banner-text">
+                <h1>Report a Found Item</h1>
+                <p>You found something — great! Help us return it to its owner. This takes less than 2 minutes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- main content -->
+    <div id="form-page-wrap">
+
+        <div id="form-left">
+
+            <div class="form-card">
+                <div class="form-card-header found-header">
+                    <i class="fa-solid fa-file-pen"></i>
+                    Found Item Details
+                </div>
+
+                <div class="form-card-body">
+
+                    <!-- item name -->
+                    <div class="field-group">
+                        <label for="item-name">Item Name <span class="required-star">*</span></label>
+                        <input type="text" id="item-name" class="text-input" placeholder="e.g. Black Backpack" name="item_name">
+                    </div>
+
+                    <!-- category -->
+                    <div class="field-group">
+                        <label for="item-category">Category <span class="required-star">*</span></label>
+                        <div class="select-wrap">
+                            <select id="item-category" class="select-input" name="item_category">
+                                <option value="">-- Select a category --</option>
+                                <option value="electronics">Electronics (phone, laptop, charger, etc.)</option>
+                                <option value="documents">Documents (ID card, admit card, etc.)</option>
+                                <option value="accessories">Accessories (watch, glasses, keys, etc.)</option>
+                                <option value="bags">Bags & Clothing</option>
+                                
+                                <option value="stationery">Books & Stationery</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down select-arrow"></i>
+                        </div>
+                    </div>
+
+                    <!-- description -->
+                    <div class="field-group">
+                        <label for="item-desc">Description <span class="required-star">*</span></label>
+                        <textarea id="item-desc" class="textarea-input" rows="4"  placeholder="Describe what you found — color, brand, condition, any marks or stickers. " name="item_desc"></textarea>
+                        
+                    </div>
+
+                    <!-- two fields side by side -->
+                    <div class="two-col-fields">
+
+                        <!-- found location -->
+                        <div class="field-group">
+                            <label for="found-location">Where You Found It <span class="required-star">*</span></label>
+                            <input type="text" id="found-location" class="text-input" placeholder="e.g. near Aryabhatta hostel " name="found_location">
+                            
+                        </div>
+
+                        <!-- date found -->
+                        <div class="field-group">
+                            <label for="date-found">Date <span class="required-star">*</span></label>
+                            <input type="date" id="date-found" class="text-input" name="date_found">
+                        </div>
+
+                    </div>
+
+                    <!-- item status - unique to found form -->
+                    <div class="field-group">
+                        <label>Where is the item right now? <span class="required-star">*</span></label>
+                        <div class="radio-group" id="item-status-group">
+
+                            <label class="radio-option" id="radio-keeping">
+                                <input type="radio" name="item_status" value="keeping">
+                                <div class="radio-card">
+                                    <i class="fa-solid fa-box radio-card-icon"></i>
+                                    <div>
+                                        <span class="radio-main">I have it with me</span>
+                                        <span class="radio-sub">Owner contacts you through the platform</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="radio-option" id="radio-security">
+                                <input type="radio" name="item_status" value="security">
+                                <div class="radio-card">
+                                    <i class="fa-solid fa-shield-halved radio-card-icon"></i>
+                                    <div>
+                                        <span class="radio-main">Submitted to security / warden</span>
+                                        <span class="radio-sub">Owner should collect from the office</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="radio-option" id="radio-left">
+                                <input type="radio" name="item_status" value="left-there">
+                                <div class="radio-card">
+                                    <i class="fa-solid fa-location-dot radio-card-icon"></i>
+                                    <div>
+                                        <span class="radio-main">Left at the found spot</span>
+                                        <span class="radio-sub">I couldn't pick it up but saw it there</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <!-- image upload -->
+                    <div class="field-group">
+                        <label>Upload Photo <span class="optional-tag">(very helpful for AI matching)</span></label>
+                        <div class="upload-area" id="upload-area-found">
+                            <input type="file" id="photo-upload-found" accept="image/*" style="display:none;" name="img">
+                            <div id="upload-placeholder-found" class="upload-placeholder">
+                                <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                                <p class="upload-main-text">Drag & drop a photo here</p> 
+                                <p class="upload-sub-text"> <span class="upload-link" id="upload-trigger-found">click to browse</span></p>
+                                <p class="upload-formats">JPG, PNG, WEBP — max 5MB</p> 
+                            </div>
+                            <div id="image-preview-found" class="image-preview-wrap" style="display:none;">
+                                <img id="preview-img-found" class="preview-img" src="" alt="Preview">
+                                <button type="button" class="remove-img-btn" id="remove-img-found">
+                                    <i class="fa-solid fa-xmark"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- submit -->
+                    <button type="button" id="submit-found-btn" class="submit-btn found-submit-btn">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        Submit Found Report
+                    </button>
+
+                    <p class="form-note">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Thank you for helping out. Your report will immediately go live and the owner will be notified if a match is found.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- right panel -->
+        <div id="form-right">
+
+            <!-- why it matters -->
+            <div class="info-card found-info-card">
+                <div class="found-hero-msg">
+                    <i class="fa-solid fa-heart found-heart"></i>
+                    <p>By reporting what you found, you might make someone's entire day.</p>
+                </div>
+            </div>
+
+            <!-- tips -->
+            <div class="info-card">
+                <div class="info-card-title">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    Tips for a Good Report
+                </div>
+                <ul class="tips-list">
+                    <li>
+                        <i class="fa-solid fa-check tip-check"></i>
+                        Do NOT reveal everything about the item publicly — let the owner prove it's theirs
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-check tip-check"></i>
+                        Upload a photo — even a blurry one is better than none for AI matching
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-check tip-check"></i>
+                        If you found it somewhere public, try submitting it to the security office
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-check tip-check"></i>
+                        Be specific about the location — "library entrance" beats "campus"
+                    </li>
+                </ul>
+            </div>
+
+            <!-- what happens next -->
+            <div class="info-card">
+                <div class="info-card-title">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    What Happens After You Submit?
+                </div>
+                <div class="steps-mini">
+                    <div class="mini-step">
+                        <div class="mini-step-num">1</div>
+                        <div class="mini-step-text">Report goes live on the platform right away</div>
+                    </div>
+                    <div class="mini-step">
+                        <div class="mini-step-num">2</div>
+                        <div class="mini-step-text">AI compares it with all active lost reports</div>
+                    </div>
+                    <div class="mini-step">
+                        <div class="mini-step-num">3</div>
+                        <div class="mini-step-text">If a match is detected, the owner is notified</div>
+                    </div>
+                    <div class="mini-step">
+                        <div class="mini-step-num">4</div>
+                        <div class="mini-step-text">The owner will reach out to you through the platform</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- success popup -->
+    <div id="success-modal" style="display:none;">
+        <div id="success-box" class="found-success-box">
+            <div class="success-icon-wrap found-success-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h2>Thanks for Reporting!</h2>
+            <p>Your found item report is now live. If there's a matching lost report, the owner will be notified.</p>
+            <div class="success-btns">
+                <button id="go-dashboard-btn" class="success-primary-btn found-primary-btn">Go to Dashboard</button>
+                <button id="go-browse-btn" class="success-secondary-btn">Browse All Items</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- logout popup -->
+    <div id="logout-modal" style="display:none;">
+        <div id="logout-box">
+            <h2><i class="fa-solid fa-right-from-bracket"></i> Logout</h2>
+            <p>Are you sure you want to logout?</p>
+            <div id="logout-btns">
+                <button id="confirm-logout-btn">Yes, Logout</button>
+                <button id="cancel-logout-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="footer-logo">Back2Owner</span>
+                <p>IIT Patna's official campus lost & found platform. Helping students reconnect with their belongings since 2026.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="browseitem">Browse Items</a>
+                    <a href="report-lost">Report Lost</a>
+                    <a href="report-found">Report Found</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Sign Up</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <a href="/about">About Us</a>
+                    <a href="#" id="footer-contact-link">Contact</a>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Back2Owner · IIT Patna </p>
+        </div>
+    </footer>
+
+    <!-- contact modal popup -->
+    <div id="contact-modal" style="display:none;">
+        <div id="contact-box">
+            <h2><i class="fa-solid fa-envelope"></i> Contact Admin</h2>
+            <p>Having an issue? We'll get back to you shortly.</p>
+            <select id="contact-subject">
+                <option value="">Select a subject</option>
+                <option value="not-resolved">My item is not resolved</option>
+                <option value="report-user">Report a user</option>
+                <option value="technical">Technical issue</option>
+                <option value="suggestion">Suggestion</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="text" id="contact-name" placeholder="Your Name">
+            <input type="text" id="contact-email" placeholder="Your Email">
+            <textarea id="contact-message" placeholder="Describe your issue..."></textarea>
+            <div id="contact-btns">
+                <button id="contact-submit-btn">Send Message</button>
+                <button id="contact-cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+<script src="/javascripts/contact-modal.js"></script>
+<script src="/javascripts/report-found.js"></script>
+
+</body>
+</html>

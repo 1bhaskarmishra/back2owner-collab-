@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Detail - Back2Owner</title>
+    <link rel="stylesheet" href="/stylesheets/item-detail.css">
+    <link rel="stylesheet" href="/stylesheets/contact-modal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="auth-data"
+         data-logged-in="<%= isLoggedIn ? 'true' : 'false' %>"
+         data-username="<%= user ? user.name : '' %>"
+         style="display:none;">
+    </div>
+    <nav id="navbar">
+        <div id="nav-left">
+            <img src="/images/logo_only.svg" id="logo">
+            <span id="brand-name">Back2Owner</span>
+        </div>
+
+        <div id="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/browseitem" class="nav-link">Browse</a>
+            <a href="/report-lost" class="nav-link">Report Lost</a>
+            <a href="/report-found" class="nav-link">Report Found</a>
+            
+        </div>
+
+        <!-- shown when user is NOT logged in -->
+        <div id="nav-right-logout">
+             <button id="login-btn"><i class="fa-regular fa-user"></i> Login</button>
+             <button id="signup-btn">Sign Up</button>
+        </div>
+
+         <!-- shown when user IS logged in  -->
+        <div id="nav-right-login" style="display:none;">
+             <span id="nav-username" ></span>
+             <button id="dashboard-btn">My Dashboard</button>
+             <button id="logout-btn">Logout</button>
+        </div>
+    </nav> 
+
+    <!-- Main Detail Section -->
+    <div id="detail-wrapper">
+
+        <!-- Left: Image -->
+        <div id="detail-image-box">
+            <% if (item.status == "lost"){ %>
+                <div class="badge lost-badge" id="detail-badge">LOST</div>
+            <%}%>
+            <%if (item.status == "found" || item.status == "resolved"){ %>
+                <div class="badge found-badge" id="detail-badge"><%= item.status.toUpperCase() %></div>
+            <%}%>
+            <img src="data:<%= item.mimetype %>;base64,<%= item.img.toString('base64') %>" alt="<%= item.item_name %>" id="detail-img" >
+        </div>
+
+        <!-- Right: Info -->
+        <div id="detail-info-box">
+
+            <h1 id="detail-title"><%= item.item_name %></h1>
+
+            <div id="detail-meta">
+                <div class="meta-row">
+                    <i class="fa-solid fa-tag"></i>
+                    <span><strong>Category:</strong> <%= item.category %></span>
+                </div>
+                <div class="meta-row">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span><strong>Location:</strong> <%= item.location %></span>
+                </div>
+                <div class="meta-row">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span><strong>Date Reported:</strong> <%= item.incident_date.toLocaleString('en-GB', {day: '2-digit', month: 'long', year: 'numeric'}) %> </span>
+                </div>
+                <div class="meta-row">
+                    <i class="fa-solid fa-clock"></i>
+                    <span><strong>Posted By:</strong> <%= item.name %></span>
+                </div>
+            </div>
+
+            <div id="detail-description-box">
+                <h3>Description</h3>
+                <p id="detail-description">
+                    <%= item.description %>
+                </p>
+            </div>
+
+            <div id="resolved-banner" style="display:none;">
+                <i class="fa-solid fa-circle-check"></i>
+                This item has been marked as <strong>Resolved</strong>.
+                The owner has been reunited with their item.
+            </div>
+
+            <!-- Action Buttons -->
+            <div id="action-buttons">
+                <button id="main-action-btn">
+                    <i class="fa-solid fa-handshake"></i> I Found This Item!
+                </button>
+                <button id="chat-btn">
+                    <i class="fa-solid fa-comments"></i> Chat with Owner
+                </button>
+                <button id="share-btn">
+                    <i class="fa-solid fa-share-nodes"></i> Share
+                </button>
+            </div>
+
+            <!-- Reporter Contact Note -->
+            <p id="contact-note">
+                <i class="fa-solid fa-circle-info"></i>
+                Use <strong>Chat</strong> to message the reporter directly. Or click the main button to send a quick notification.
+                
+            </p>
+
+
+        </div>
+    </div>
+
+    <!-- Similar Items Section -->
+    <section id="similar-section">
+        <h2>Similar Items</h2>
+        <p class="similar-subtitle">Other reports that might be related</p>
+
+        <div id="similar-grid">
+
+        </div>
+    </section>
+
+    
+    <!-- footer -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="footer-logo">Back2Owner</span>
+                <p>IIT Patna's official campus lost & found platform. Helping students reconnect with their belongings since 2026.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="/browseitem">Browse Items</a>
+                    <a href="/report-lost">Report Lost</a>
+                    <a href="/report-found">Report Found</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Sign Up</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <a href="/about">About Us</a>
+                    <a href="#" id="footer-contact-link">Contact</a>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Back2Owner · IIT Patna </p>
+        </div>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div id="modal-overlay" style="display:none;">
+        <div id="modal-box">
+            <h2 id="modal-title">
+                <i class="fa-solid fa-handshake"></i> I Found This Item!
+            </h2>
+            <p id="modal-desc">Please provide your contact details so the owner can reach you through the platform.</p>
+            <input type="text" id="modal-name" placeholder="Your Name">
+            <input type="text" id="modal-contact" placeholder="Your Email or Phone">
+            <textarea id="modal-message" placeholder="Any extra details? (optional)"></textarea>
+            <div id="modal-buttons">
+                <button id="modal-submit-btn">Send Notification</button>
+                <button id="modal-cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-modal" style="display:none;">
+    <div id="logout-box">
+        <h2><i class="fa-solid fa-right-from-bracket"></i> Logout</h2>
+        <p>Are you sure you want to logout?</p>
+        <div id="logout-btns">
+            <button id="confirm-logout-btn">Yes, Logout</button>
+            <button id="cancel-logout-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- contact modal popup -->
+    <div id="contact-modal" style="display:none;">
+        <div id="contact-box">
+            <h2><i class="fa-solid fa-envelope"></i> Contact Admin</h2>
+            <p>Having an issue? We'll get back to you shortly.</p>
+            <select id="contact-subject">
+                <option value="">Select a subject</option>
+                <option value="not-resolved">My item is not resolved</option>
+                <option value="report-user">Report a user</option>
+                <option value="technical">Technical issue</option>
+                <option value="suggestion">Suggestion</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="text" id="contact-name" placeholder="Your Name">
+            <input type="text" id="contact-email" placeholder="Your Email">
+            <textarea id="contact-message" placeholder="Describe your issue..."></textarea>
+            <div id="contact-btns">
+                <button id="contact-submit-btn">Send Message</button>
+                <button id="contact-cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/javascripts/contact-modal.js"></script>
+    <script src="/javascripts/item-detail.js"></script>
+</body>
+</html>

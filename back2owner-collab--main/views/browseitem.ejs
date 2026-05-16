@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Items - Back2Owner</title>
+    <link rel="stylesheet" href="stylesheets/browseitem.css">
+    <link rel="stylesheet" href="stylesheets/responsive.css">
+    <link rel="stylesheet" href="/stylesheets/contact-modal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="user-data"
+     data-logged-in="<%= isLoggedIn ? 'true' : 'false' %>"
+     data-username="<%= user ? user.name : '' %>"
+     style="display:none;">
+</div>
+    <nav id="navbar">
+        <div id="nav-left">
+            <a href="/"><img src="/images/logo_only.svg" id="logo"></a>
+            <span id="brand-name"><a href="/" id="brand-name" style="text-decoration: none">Back2Owner</a></span>
+        </div>
+
+        <div id="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="browseitem" class="nav-link">Browse</a>
+            <a href="/report-lost" class="nav-link">Report Lost</a>
+            <a href="/report-found" class="nav-link">Report Found</a>
+            
+        </div>
+
+        <!-- shown when user is NOT logged in -->
+        <div id="nav-right-logged-out">
+             <button id="login-btn"><i class="fa-regular fa-user"></i> Login</button>
+             <button id="signup-btn">Sign Up</button>
+        </div>
+
+         <!-- shown when user IS logged in  -->
+        <div id="nav-right-login" style="display:none;">
+             <span id="nav-username" ></span>
+             <button id="dashboard-btn">My Dashboard</button>
+             <button id="logout-btn">Logout</button>
+        </div>
+    </nav> 
+
+  
+    
+    <!-- Page Header -->
+    <div id="page-header">
+        <h1>Browse Items</h1>
+        <p>Search through lost and found reports from across campus</p>
+    </div>
+ 
+    <!-- Search + Filter Bar -->
+    <div id="filter-section">
+ 
+        <!-- Search Input -->
+        <div id="search-row">
+            <div id="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="search-input" placeholder="Search by item name or description...">
+            </div>
+            <button id="search-btn">Search</button>
+        </div>
+ 
+        <!-- Filters Row -->
+        <div id="filters-row">
+ 
+            <!-- Lost / Found Toggle -->
+            <div class="filter-group">
+                <label class="filter-label">Type</label>
+                <div id="type-toggle">
+                    <button class="toggle-btn active" data-type="all">All</button>
+                    <button class="toggle-btn lost-btn" data-type="lost">Lost</button>
+                    <button class="toggle-btn found-btn" data-type="found">Found</button>
+                </div>
+            </div>
+ 
+            <!-- Category Filter -->
+            <div class="filter-group">
+                <label class="filter-label">Category</label>
+                <select id="category-filter" class="filter-select">
+                    <option value="all">All Categories</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="clothing">Clothing & Bags</option>
+                    <option value="documents">ID & Documents</option>
+                    <option value="accessories">Accessories</option>
+                    <option value="stationery">Stationery</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+ 
+            <!-- Location Filter -->
+            <div class="filter-group">
+                <label class="filter-label">Location</label>
+                <select id="location-filter" class="filter-select">
+                    <option value="all">All Locations</option>
+                    <option value="library">Library</option>
+                    <option value="cafeteria">Cafeteria</option>
+                    <option value="hostel">Hostel</option>
+                    <option value="gymkhana">Gymkhana</option>
+                    <option value="lecture-hall">Lecture Hall</option>
+                    <option value="lab">Labs</option>
+                    <option value="ground">Ground / Sports Area</option>
+                </select>
+            </div>
+ 
+            <!-- Date Filter -->
+            <div class="filter-group">
+                <label class="filter-label">Date</label>
+                <select id="date-filter" class="filter-select">
+                    <option value="all">Any Time</option>
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                </select>
+            </div>
+ 
+            <!-- Clear Filters -->
+            <button id="clear-filters-btn">
+                <i class="fa-solid fa-rotate-left"></i> Clear Filters
+            </button>
+ 
+        </div>
+    </div>
+ 
+    <!-- Results Count -->
+    <div id="results-info">
+        <span id="results-count">Showing <%= items.length %> items</span>
+    </div>
+ 
+    <!-- Items Grid -->
+    <div id="items-grid">
+        <% if (items && items.length > 0) { %>
+            <% items.forEach(item => { %>
+                <div class="item-card"
+                     data-id="<%= item.id %>"
+                     data-type=<%= item.status %>
+                     data-category=<%= item.category %>
+                     data-location=<%= item.location %> >
+                    <% if (item.status == "lost"){ %>
+                        <div class='badge lost-badge'><%= item.status %></div>
+                    <%}%>
+                    <%if (item.status == "found" || item.status == "RESOLVED"){ %>
+                        <div class='badge found-badge'><%= item.status.toUpperCase() %></div>
+                    <%}%>
+
+                    <img src="data:<%= item.mimetype %>;base64,<%= item.img.toString('base64') %>" alt="<%= item.item_name %>" class="card-img" >
+
+                    <div class="card-body">
+                        <h3 class="card-title"><%= item.item_name %></h3>
+                        <p class="card-detail"><i class="fa-solid fa-location-dot"></i> <%= item.location %></p>
+                        <p class="card-detail"><i class="fa-solid fa-calendar"></i> <%= item.incident_date.toLocaleDateString() %></p>
+                        <p class="card-detail"><i class="fa-solid fa-tag"></i> <%= item.category %></p>
+                        <a href="/item-detail/<%= item.id %>" style="text-decoration: none; color: #ffffff">
+                            <button class="view-btn">View Details</button>
+                        </a>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No items reported yet.</p>
+        <% } %>
+</div>
+
+    <!-- No Results Message (hidden by default) -->
+    <div id="no-results" style="display:none;">
+        <i class="fa-solid fa-box-open"></i>
+        <p>No items found matching your filters.</p>
+        <button id="reset-btn">Clear Filters</button>
+    </div>
+
+    <!-- footer -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="footer-logo">Back2Owner</span>
+                <p>IIT Patna's official campus lost & found platform. Helping students reconnect with their belongings since 2026.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="browseitem">Browse Items</a>
+                    <a href="report-lost">Report Lost</a>
+                    <a href="report-found">Report Found</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="/login">Login</a>
+                    <a href="/signup">Sign Up</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <a href="/about">About Us</a>
+                    <a href="#" id="footer-contact-link">Contact</a>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Back2Owner · IIT Patna </p>
+        </div>
+    </footer>
+ 
+    <!-- logout confirm popup -->
+
+    <div id="logout-modal" style="display:none;">
+        <div id="logout-box">
+            <h2><i class="fa-solid fa-right-from-bracket"></i> Logout</h2>
+            <p>Are you sure you want to logout?</p>
+            <div id="logout-btns">
+                <button id="confirm-logout-btn">Yes, Logout</button>
+                <button id="cancel-logout-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- contact modal popup -->
+    <div id="contact-modal" style="display:none;">
+        <div id="contact-box">
+            <h2><i class="fa-solid fa-envelope"></i> Contact Admin</h2>
+            <p>Having an issue? We'll get back to you shortly.</p>
+            <select id="contact-subject">
+                <option value="">Select a subject</option>
+                <option value="not-resolved">My item is not resolved</option>
+                <option value="report-user">Report a user</option>
+                <option value="technical">Technical issue</option>
+                <option value="suggestion">Suggestion</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="text" id="contact-name" placeholder="Your Name">
+            <input type="text" id="contact-email" placeholder="Your Email">
+            <textarea id="contact-message" placeholder="Describe your issue..."></textarea>
+            <div id="contact-btns">
+                <button id="contact-submit-btn">Send Message</button>
+                <button id="contact-cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/javascripts/contact-modal.js"></script>
+    <script src="/javascripts/browseitem.js"></script>
+<!--    <script src="/javascripts/responsive.js"></script>-->
+    
+</body>
+</html>

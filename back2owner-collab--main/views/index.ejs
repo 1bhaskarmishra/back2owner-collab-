@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back2Owner - Campus Lost & Found</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/contact-modal.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<div id="auth-data"
+     data-logged-in="<%= isLoggedIn %>"
+     data-username="<%= user ? user.name : '' %>">
+</div>
+    <!-- navbar -->
+    <nav id="navbar">
+        <div id="nav-left">
+            <img src="/images/logo_only.svg" id="logo">
+            <span id="brand-name">Back2Owner</span>
+        </div>
+
+        <div id="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/browseitem" class="nav-link">Browse</a>
+            <a href="/report-lost" class="nav-link">Report Lost</a>
+            <a href="/report-found" class="nav-link">Report Found</a>
+            <a href="/about" class="nav-link">About</a>
+        </div>
+
+        <!-- shown when user is NOT logged in -->
+        <div id="nav-right-logout">
+             <button id="login-btn"><i class="fa-regular fa-user"></i> Login</button>
+             <button id="signup-btn">Sign Up</button>
+        </div>
+
+        <!-- shown when user IS logged in -->
+        <div id="nav-right-login" style="display:none;">
+             <span id="nav-username" style="color:white; font-weight:700; margin-right:10px;"></span>
+             <button id="dashboard-btn">My Dashboard</button>
+             <button id="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <!-- hero section -->
+    <div id="hero-section">
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                <i class="fa-solid fa-shield-halved"></i>
+                IIT Patna's Official Lost & Found Platform
+            </div>
+
+            <br>
+            <h1>Lost Something? <br><span class="blue-text">We'll Find It.</span></h1>
+            <br>
+
+            <p class="hero-desc">
+                Back2Owner uses AI-powered image matching to connect lost items with their owners — faster, smarter, and safer.
+            </p>
+            <br>
+
+            <div id="buttons">
+                <button id="lost">
+                    <i class="fa-solid fa-triangle-exclamation btn-icon"></i>
+                    <span class="btn-text">
+                        <span class="btn-main">Report Lost Item</span>
+                        <span class="btn-sub">Lost something? Report now</span>
+                    </span>
+                </button>
+
+                <button id="found">
+                    <i class="fa-solid fa-check btn-icon"></i>
+                    <span class="btn-text">
+                        <span class="btn-main">Report Found Item</span>
+                        <span class="btn-sub">Found something? Help someone</span>
+                    </span>
+                </button>
+
+                <button id="browse">
+                    <i class="fa-solid fa-magnifying-glass btn-icon"></i>
+                    Browse All Items
+                </button>
+            </div>
+            <br>
+
+            <!-- small stats row -->
+            <div class="hero-stats">
+                <div class="stat-box">
+                    <span class="stat-num">120+</span>
+                    <span class="stat-label">Items Returned</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-box">
+                    <span class="stat-num">85%</span>
+                    <span class="stat-label">Match Rate</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-box">
+                    <span class="stat-num">500+</span>
+                    <span class="stat-label">Campus Users</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- search bar -->
+    <div id="search-section">
+        <div id="Search-bar">
+            <div class="search-inner">
+                <i class="fa-solid fa-magnifying-glass" style="color: #9ca3af; font-size: 18px;"></i>
+                <input type="text" id="searchInput" placeholder="Search by item name, location, or category...">
+                <button id="searchBtn">Search</button>
+            </div>
+
+            <!-- quick search tags -->
+            <div class="search-tags">
+                <span class="search-tag" onclick="quickSearch('wallet')">Wallet</span>
+                <span class="search-tag" onclick="quickSearch('phone')">Phone</span>
+                <span class="search-tag" onclick="quickSearch('keys')">Keys</span>
+                <span class="search-tag" onclick="quickSearch('id card')">ID Card</span>
+                <span class="search-tag" onclick="quickSearch('laptop')">Laptop</span>
+                <span class="search-tag" onclick="quickSearch('earphones')">Earphones</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- how it works -->
+    <section id="work-flow">
+        <div class="section-label">Simple Process</div>
+        <h2>How It Works</h2>
+        <p class="section-sub">Three easy steps to reunite you with your lost belongings</p>
+        <br>
+
+        <div id="steps">
+
+            <div class="step" id="step-1">
+                <div class="step-number">01</div>
+                <div class="step-icon">
+                    <i class="fa-solid fa-file-pen"></i>
+                </div>
+                <h3>Report</h3>
+                <p>Submit a detailed report of your lost or found item with photos, description and location in under 2 minutes.</p>
+            </div>
+
+            <div class="step-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+
+            <div class="step" id="step-2">
+                <div class="step-number">02</div>
+                <div class="step-icon">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h3>AI Matches</h3>
+                <p>Our AI scans all reports and compares images and descriptions to find the most likely matches instantly.</p>
+            </div>
+
+            <div class="step-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+
+            <div class="step" id="step-3">
+                <div class="step-number">03</div>
+                <div class="step-icon">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
+                <h3>Connect & Claim</h3>
+                <p>Chat securely through the platform with the finder or owner and arrange a safe handover on campus.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- recently reported items -->
+    <section id="recent-posts">
+        <div class="section-label">Latest Activity</div>
+        <h2>Recently Reported Items</h2>
+        <p class="section-sub">Browse the most recent lost and found reports on campus</p>
+        <br>
+
+        <div id="items">
+            <% if (items && items.length > 0) { %>
+                <% items.forEach(item => { %>
+                    <div class="item-card">
+                        <% if (item.status == "lost"){ %>
+                            <div class="item-status lost-tag">Lost</div>
+                        <%}%>
+                        <%if (item.status == "found" || item.status == "RESOLVED"){ %>
+                                <div class="item-status found-tag"><%= item.status %></div>
+                        <%}%>
+
+                        <img src="data:<%= item.mimetype %>;base64,<%= item.img.toString('base64') %>" alt="<%= item.item_name %>" class="report-img item_image" >
+                        <div class="item-body">
+                            <h3 class="item-name"><%= item.item_name %></h3>
+                            <p class="details"><i class="fa-solid fa-location-dot"></i> <%= item.location %></p>
+                            <p class="details"><i class="fa-regular fa-clock"></i> <%= item.incident_date.toLocaleString('en-GB', {day: '2-digit', month: 'long', year: 'numeric'}) %></p>
+                            <a href="/item-detail/<%= item.id %>" class="view-btn" style="text-decoration: none">View Details <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                <% }); } else if (typeof dbError !== 'undefined' && dbError) { %>
+                    <div class="db-error-message">
+                        <i class="fa-solid fa-database"></i>
+                        <p>We're having trouble connecting to our database. Please refresh the page or try again later.</p>
+                    </div>
+            <% } else { %>
+                <p>No items reported yet. Be the first to report!</p>
+            <% } %>
+        </div>
+
+        <br><br>
+
+        <div style="text-align: center;">
+            <button id="browse-all-btn">View All Items <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </section>
+
+    <!-- features section -->
+    <section id="features">
+        <div class="section-label">Why Us</div>
+        <h2>Why Choose Back2Owner?</h2>
+        <p class="section-sub">Built specifically for campus life at IIT Patna</p>
+        <br>
+
+        <div id="features-list">
+
+            <div class="feature-card dark-card">
+                <div class="feature-icon-wrap">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h3>AI-Powered Smart Matching</h3>
+                <br>
+                <p class="feature-quote">"Lost something? We'll find it for you."</p>
+                <br>
+                <p>Our intelligent system compares lost and found reports using item images and descriptions. Powered by the Gemini API, it surfaces the most likely matches instantly.</p>
+                <br>
+                <span class="feature-badge">Core Feature</span>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-wrap light-icon">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+                <h3>Secure Communication</h3>
+                <p>Connect with finders or owners inside the platform. No phone numbers. No personal info. Just safe, easy coordination.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-wrap light-icon">
+                    <i class="fa-solid fa-sliders"></i>
+                </div>
+                <h3>Advanced Filters</h3>
+                <p>Filter by category, location, or date. Find exactly what you're looking for in seconds — no scrolling through endless posts.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-wrap light-icon">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+                <h3>Real-Time Alerts</h3>
+                <p>Get instantly notified the moment a match is detected. No waiting, no manual searching — just instant alerts to your account.</p>
+            </div>
+
+            <div class="feature-card blue-card">
+                <i class="fa-solid fa-building-columns" style="font-size: 36px; color: #facc15; margin-bottom: 14px;"></i>
+                <h3>Built for Campus Life</h3>
+                <p>Purpose-built for IIT Patna — where losing your ID, keys, or wallet can ruin your day. Smarter than any WhatsApp group or notice board.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <span class="footer-logo">Back2Owner</span>
+                <p>IIT Patna's official campus lost & found platform. Helping students reconnect with their belongings since 2026.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="browseitem">Browse Items</a>
+                    <a href="report-lost">Report Lost</a>
+                    <a href="report-found">Report Found</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="login">Login</a>
+                    <a href="signup">Sign Up</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Info</h4>
+                    <a href="/about">About Us</a>
+                    <a href="#" id="footer-contact-link">Contact</a>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Back2Owner · IIT Patna </p>
+        </div>
+    </footer>
+
+    <!-- logout popup -->
+<div id="logout-modal" style="display:none;">
+    <div id="logout-box">
+        <h2><i class="fa-solid fa-right-from-bracket"></i> Logout</h2>
+        <p>Are you sure you want to logout?</p>
+        <div id="logout-btns">
+            <button id="confirm-logout-btn">Yes, Logout</button>
+            <button id="cancel-logout-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- contact modal popup -->
+    <div id="contact-modal" style="display:none;">
+        <div id="contact-box">
+            <h2><i class="fa-solid fa-envelope"></i> Contact Admin</h2>
+            <p>Having an issue? We'll get back to you shortly.</p>
+            <select id="contact-subject">
+                <option value="">Select a subject</option>
+                <option value="not-resolved">My item is not resolved</option>
+                <option value="report-user">Report a user</option>
+                <option value="technical">Technical issue</option>
+                <option value="suggestion">Suggestion</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="text" id="contact-name" placeholder="Your Name">
+            <input type="text" id="contact-email" placeholder="Your Email">
+            <textarea id="contact-message" placeholder="Describe your issue..."></textarea>
+            <div id="contact-btns">
+                <button id="contact-submit-btn">Send Message</button>
+                <button id="contact-cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+<script src="/javascripts/contact-modal.js"></script>
+<script src="/javascripts/script.js"></script>
+
+</body>
+</html>
